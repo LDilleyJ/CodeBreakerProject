@@ -4,11 +4,11 @@ let attempt = document.getElementById('attempt');
 function guess() {
     let input = document.getElementById('user-guess');
 
-    if (answer.value == "" || attempt.value = ""){
+    if (answer.value == "" || attempt.value == ""){
       setHiddenFields();
     }
     if (!validateInput(input.value)){
-      return false;
+      return;
     }
 
     attempt.value++;
@@ -26,11 +26,10 @@ function guess() {
     else {
       setMessage("Incorrect, try again.");
     }
-
 }
 
 function setHiddenFields(){
-  answer.value = Math.floor(Math.random()*10000).toString;
+  answer.value = Math.floor(Math.random()*10000).toString();
   while (answer.value.length < 4){
     answer.value = "0" + answer.value;
   }
@@ -51,26 +50,26 @@ function validateInput(input){
 
 function getResults(userGuess){
   //Check each character to see if it is in the answer string
-  let resultDisplay = "<div class="row"><span class="col-md-6">" + userGuess + "</span><div class="col-md-6">";
+  let resultDisplay = '<div class="row"><span class="col-md-6">' + userGuess + '</span><div class="col-md-6">';
 
   //Count how many guesses were entered correctly
   let numberCorrectGuesses = 0;
 
   for(var i = 0; i < userGuess.length; i++){
-    if (userGuess.charat(i) == answer.value.charat(i)){
-      resultDisplay += "<span class="glyphicon glyphicon-ok"></span>";
+    if (userGuess.charAt(i) == answer.value.charAt(i)){
+      resultDisplay += '<span class="glyphicon glyphicon-ok"></span>';
       numberCorrectGuesses ++;
     }
-    else if (answer.value.indexOf(userGuess.charat(i))> -1){
-      resultDisplay += "<span class="glyphicon glyphicon-transfer"></span>";
+    else if (answer.value.indexOf(userGuess.charAt(i))> -1){
+      resultDisplay += '<span class="glyphicon glyphicon-transfer"></span>';
     }
     else {
-      resultDisplay += "<span class="glyphicon glyphicon-remove"></span>";
+      resultDisplay += '<span class="glyphicon glyphicon-remove"></span>';
     }
   }
 
   resultDisplay += "</div></div>";
-  document.getElementById("results").innerHTML = resultDisplay;
+  document.getElementById("results").innerHTML += resultDisplay;
 
   if (numberCorrectGuesses == 4){
     return true;
